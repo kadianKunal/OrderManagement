@@ -5,7 +5,6 @@ import com.bookstore.ordermanagement.entities.BookDetail;
 import com.bookstore.ordermanagement.entities.Order;
 import com.bookstore.ordermanagement.models.Book;
 import com.bookstore.ordermanagement.models.OrderSummary;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -72,7 +70,7 @@ public class OrderService {
         double totalAmount = 0;
 
         // Make PUT API call to Book service to update and get book details
-        String url = "http://localhost:8080/books/order";
+        String url = "http://book-service/books/order";
         ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.PUT,
@@ -130,7 +128,7 @@ public class OrderService {
             List<BookDetail> orderedBooks = deletedOrder.getBookDetails();
 
             // Make PUT API call to Book service to update and get book details
-            String url = "http://localhost:8080/books/return";
+            String url = "http://book-service/books/return";
             ResponseEntity<Boolean> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.PUT,
